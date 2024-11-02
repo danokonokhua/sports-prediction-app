@@ -26,14 +26,18 @@ function calculateFactors(match: Match): PredictionFactors {
 }
 
 function calculateProbabilities(factors: PredictionFactors) {
-  // Implementation of probability calculation
+  // Fix probability calculation to ensure they sum to 100%
   const totalScore = Object.values(factors).reduce((a, b) => a + b, 0);
-  const baseProb = totalScore / 5; // Average of all factors
+  const baseProb = (totalScore / 5) * 100; // Convert to percentage
+  
+  const homeWinProb = Math.min(90, baseProb * 1.1);
+  const awayWinProb = Math.min(90, baseProb * 0.9);
+  const drawProb = Math.max(0, 100 - (homeWinProb + awayWinProb));
   
   return {
-    homeWinProbability: Math.min(95, baseProb * 1.1), // Home advantage bonus
-    drawProbability: 100 - baseProb,
-    awayWinProbability: Math.min(95, baseProb * 0.9), // Away disadvantage
+    homeWinProbability: homeWinProb,
+    drawProbability: drawProb,
+    awayWinProbability: awayWinProb,
   };
 }
 

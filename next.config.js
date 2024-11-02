@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  output: 'export',
   images: {
-    unoptimized: true, // Disable default image optimization
+    unoptimized: true,
   },
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  output: 'export'
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
 };
 
 export default nextConfig;
